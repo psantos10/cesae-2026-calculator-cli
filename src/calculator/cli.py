@@ -1,7 +1,7 @@
 import platform
 import subprocess
 
-from calculator import operations
+from . import operations
 
 def main() -> None:
     while True:

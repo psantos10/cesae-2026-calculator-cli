@@ -1,6 +1,6 @@
 import pytest
 
-from calculator import operations
+from . import operations
 
 
 def test_addition():

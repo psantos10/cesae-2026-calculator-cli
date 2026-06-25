@@ -1,0 +1,13 @@
+name : CI (Continous Integration)
+on: [push, pull_request]
+
+jobs :
+    test:
+        runs-on : ubuntu-latest
+        steps : 
+            - uses : actions/checkout@v7
+            - uses: astral-sh/setup-uv@8.2.0
+              with :
+                python-version: 3.14.6
+            - name : Rum test
+              run : uv run --frozen pytest
