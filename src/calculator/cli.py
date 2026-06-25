@@ -45,6 +45,9 @@ def execute_operation(op: int, num1: float, num2: float) -> float:
         return operations.multiply(num1, num2)
     elif op == 4:
         return operations.divide(num1, num2)
+    elif op == 5:
+        values = [num1, num2]
+        return operations.average(values)
     else:
         raise ValueError("Operação inválida!")
 

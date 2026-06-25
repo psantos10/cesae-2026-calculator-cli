@@ -28,3 +28,9 @@ def test_division():
 
     with pytest.raises(ValueError):
         operations.divide(5, 0)
+
+
+def test_average():
+    assert operations.average([1, 2, 3, 4, 5]) == 3
+    assert operations.average([-1, 0, 1]) == 0
+    assert operations.average([]) == 0
