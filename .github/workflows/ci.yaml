@@ -1,3 +1,26 @@
+name: CI (Continuous Integration)
+
+on:
+  push:
+    branches:
+      - main
+      - new_pipeline # 1. Adicionado para o workflow correr sempre que fizeres push nesta branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.14"
+
+      - name: Run tests
+        run: uv run --frozen pytest
+
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -15,5 +38,5 @@
         uses: docker/build-push-action@v6
         with:
           context: .
-          push: true
+          push: true # 2. Força o envio para o Docker Hub em qualquer branch
           tags: rafael609/calculator-cli:latest
