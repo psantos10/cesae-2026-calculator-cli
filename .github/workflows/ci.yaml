@@ -1,19 +1,41 @@
-name: CI (Continous Integration)
-on:
+name: CI (Continuos Integration)
+on: 
     push:
         branches: [main]
-    pull_request:
+    pull_request: 
+        branches: [main]
 
 jobs:
     test:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v7
-
             - name: Install the latest version of uv
-              uses: astral-sh/setup-uv@v8.2.0
+              uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b
               with:
-                  python-version: 3.14.6
+                python-version: 3.14.6
 
             - name: Rum Test
               run: uv run --frozen pytest
+
+
+    docker:
+        runs-on: ubuntu-latest
+        needs: test 
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Login to DockerHub
+              uses: docker/login-action@v3
+              with:
+                username: ${{ secrets.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_TOKEN }}
+            - name: Build and push Docker image
+              uses: docker/build-push-action@v6
+              with:
+                context: .
+                push: true
+                tags: ${{ secrets.DOCKERHUB_USERNAME }}/calculator-cli:latest
