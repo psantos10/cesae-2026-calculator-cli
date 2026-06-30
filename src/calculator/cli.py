@@ -23,7 +23,7 @@ def main() -> None:
 
 
 def menu_selector() -> int:
-    clear_screen();
+    clear_screen()
     print("=== CALCULADOR CLI - MENU ===")
     print()
     print("1. Adição")
