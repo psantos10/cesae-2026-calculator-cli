@@ -11,3 +11,11 @@ def divide(a: float, b: float) -> float:
     if b == 0:
         raise ValueError("Não é possível dividir por zero.")
     return a / b
+
+def average(numbers: list) -> float:
+    if not numbers:
+        raise ValueError("A lista de números está vazia.")
+    return sum(numbers) / len(numbers)
+
+def power(base: float, exponent: float) -> float:
+    return base ** exponent

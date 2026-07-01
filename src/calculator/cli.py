@@ -9,7 +9,6 @@ def main() -> None:
         if operation == 0:
             break
 
-
         num1 = float(input("Digite o primeiro número: "))
         num2 = float(input("Digite o segundo número: "))
         result = execute_operation(operation, num1, num2)
@@ -30,6 +29,8 @@ def menu_selector() -> int:
     print("2. Subtração")
     print("3. Multiplicação")
     print("4. Divisão")
+    print("5. Média")
+    print("6. Potência")
     print("0. SAIR")
     print()
 
@@ -45,6 +46,11 @@ def execute_operation(op: int, num1: float, num2: float) -> float:
         return operations.multiply(num1, num2)
     elif op == 4:
         return operations.divide(num1, num2)
+    elif op == 5:
+        numbers = [num1, num2]
+        return operations.average(numbers)
+    elif op == 6:
+        return operations.power(num1, num2)
     else:
         raise ValueError("Operação inválida!")
 
