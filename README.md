@@ -26,3 +26,5 @@ Executar linter
 ```sh
 uv run ruff check
 ```
+
+Pipeline test
